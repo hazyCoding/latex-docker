@@ -15,12 +15,10 @@ The idea is that the base container should be pretty small, so it builds quickly
 
 ## Usage
 
-Clone this repo, then build a Docker image from the Dockerfile:
+Build a Docker image from the Dockerfile:
 
 ```
-git clone https://github.com/alexwlchan/tex-dockerfile.git
-cd tex-dockerfile
-docker build --tag alexwlchan/texlive .
+docker build --tag hazycoding/latex .
 ```
 
 To build a document, mount the folder containing the document at `/data` and run the Docker image, passing the name of the LaTeX binary and the source document as arguments.
@@ -29,7 +27,7 @@ For example:
 ```
 docker run \
   --volume $(pwd):/data \
-  alexwlchan/texlive \
+  hazycoding/latex \
   xelatex example.tex
 ```
 
@@ -42,13 +40,13 @@ For example:
 
 ```dockerfile
 # lastpage.Dockerfile
-FROM alexwlchan/texlive
+FROM hazycoding/latex
 
 RUN tlmgr update --self && tlmgr install lastpage
 ```
 
 ```
-docker build --tag alexwlchan/texlive-with-lastpage --file lastpage.Dockerfile .
+docker build --tag hazycoding/latex-with-lastpage --file lastpage.Dockerfile .
 ```
 
 To build documents with this image, use the new image name in the `docker run` command:
@@ -56,7 +54,7 @@ To build documents with this image, use the new image name in the `docker run` c
 ```
 docker run \
   --volume $(pwd):/data \
-  alexwlchan/texlive-with-lastpage \
+  hazycoding/latex-with-lastpage \
   xelatex example.tex
 ```
 
