@@ -18,7 +18,7 @@ The idea is that the base container should be pretty small, so it builds quickly
 Build a Docker image from the Dockerfile:
 
 ```
-docker build --tag hazycoding/latex .
+docker build --tag hazycoding/latex . && docker push hazycoding/latex
 ```
 
 To build a document, mount the folder containing the document at `/data` and run the Docker image, passing the name of the LaTeX binary and the source document as arguments.
